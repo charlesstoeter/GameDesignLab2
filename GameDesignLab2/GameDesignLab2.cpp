@@ -25,7 +25,6 @@ int main()
 		return -1;
 	}
 
-	ALLEGRO_EVENT_QUEUE* event_queue = al_create_event_queue();
 
 
 	// Initialize Allegro Keyboard
@@ -108,7 +107,8 @@ int main()
 		}
 		else if (event.type == ALLEGRO_EVENT_TIMER) {
 			al_clear_to_color(al_map_rgb(0, 0, 0)); // Clear the display with black color
-			al_draw_filled_rectangle(x, y, 25, al_map_rgb(255, 0, 0)); // Draw a red rectangle
+			int half_size = 25; 
+			al_draw_filled_rectangle(x - half_size, y - half_size, x + half_size, y + half_size, al_map_rgb(255, 0, 0));
 			al_flip_display(); //Flips the Display
 		}
 	}
