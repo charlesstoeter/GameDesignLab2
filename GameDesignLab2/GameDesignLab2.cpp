@@ -63,7 +63,48 @@ int main()
 			running = false;
 		}
 		else if (event.type == ALLEGRO_EVENT_KEY_DOWN) {
-			
+			switch (event.keyboard.keycode) {
+			case ALLEGRO_KEY_UP:
+				y -= step;
+				break;
+
+			case ALLEGRO_KEY_DOWN:
+				y += step;
+				break;
+
+			case ALLEGRO_KEY_LEFT:
+				x -= step;
+				break;
+
+			case ALLEGRO_KEY_RIGHT:
+				x += step;
+				break;
+
+			case ALLEGRO_KEY_U:
+				x -= step;
+				y -= step;
+				break;
+
+			case ALLEGRO_KEY_D:
+				x += step;
+				y += step;
+				break;
+
+			case ALLEGRO_KEY_R:
+				x += step;
+				y -= step;
+				break;
+
+			case ALLEGRO_KEY_L:
+				x -= step;
+				y += step;
+				break;
+
+			case ALLEGRO_KEY_ESCAPE: // optional: exit program
+				running = false;
+				break;
+			}
+
 		}
 		else if (event.type == ALLEGRO_EVENT_TIMER) {
 			al_clear_to_color(al_map_rgb(0, 0, 0)); // Clear the display with black color
