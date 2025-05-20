@@ -30,13 +30,26 @@ int main()
 		std::cerr << "Failed to create display!" << std::endl;
 		return -1;
 	}
-	// Load a font
-	ALLEGRO_FONT* font = al_load_ttf_font("arial.ttf", 36, 0);
-	if (!font) {
-		std::cerr << "Failed to load font!" << std::endl;
-		al_destroy_display(display);
-		return -1;
+
+	al_clear_to_color(al_map_rgb(0, 0, 0)); // Clear the display with black color
+
+	while (true) {
+		// Draw a red rectangle
+		al_draw_filled_rectangle(100, 100, 300, 300, al_map_rgb(255, 0, 0));
+		// Draw a blue circle
+		al_draw_filled_circle(400, 300, 50, al_map_rgb(0, 0, 255));
+		// Draw some text
+		ALLEGRO_FONT* font = al_load_ttf_font("arial.ttf", 36, 0);
+		if (font) {
+			al_draw_text(font, al_map_rgb(255, 255, 255), 400, 500, ALLEGRO_ALIGN_CENTER, "Hello Allegro!");
+			al_destroy_font(font);
+		}
+
+		al_flip_display(); // Update the display
+		al_rest(1.0); // Pause for a second
 	}
+
+	
 	
 }
 
