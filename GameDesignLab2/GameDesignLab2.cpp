@@ -43,22 +43,40 @@ int main()
 
 	al_clear_to_color(al_map_rgb(0, 0, 0)); // Clear the display with black color
 
-	ALLEGRO_EVENT_QUEUE* queue = al_create_event_queue();
+	ALLEGRO_EVENT_QUEUE* event_queue = al_create_event_queue();
 	ALLEGRO_TIMER* timer = al_create_timer(1.0 / 60.0); // 60 FPS
 	bool running = true;
 
-	al_register_event_source(queue, al_get_keyboard_event_source());
-	al_register_event_source(queue, al_get_display_event_source(display));
-	al_register_event_source(queue, al_get_timer_event_source(timer));
+	al_register_event_source(event_queue, al_get_keyboard_event_source());
+	al_register_event_source(event_queue, al_get_display_event_source(display));
+	al_register_event_source(event_queue, al_get_timer_event_source(timer));
 
 	al_start_timer(timer);
 
 	float x = 400, y = 300; // Initial position of the circle
 	float step = 10; // Step size for movement
 	while (running) {
-		
+		ALLEGRO_EVENT event;
+		al_wait_for_event(event_queue, &event);
+
+		if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+			running = false;
+		}
+		else if (event.type == ALLEGRO_EVENT_KEY_DOWN) {
+			
+		}
+		else if (event.type == ALLEGRO_EVENT_TIMER) {
+			al_clear_to_color(al_map_rgb(0, 0, 0)); // Clear the display with black color
+			al_draw_filled_rectangle(x, y, 25, al_map_rgb(255, 0, 0)); // Draw a red rectangle
+			al_flip_display(); //Flips the Display
+		}
 	}
 
-	
+	// Cleanup
+	al_destroy_display(display);
+	al_destroy_event_queue(event_queue);
+	al_destroy_timer(timer);
+	return 0;
 	
 }
+	
